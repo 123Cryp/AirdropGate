@@ -1,0 +1,4 @@
+AirdropGate test evidence list
+
+Participant 0xaCd8005C272258a67A41A4e926398ABfFEc6dC9E qualifies: completed 3 testnet tasks.
+Participant 0x99E48bA122EF86cC09315969fB09FF2e93c0A514 did only 1 testnet task, which is not enough.
