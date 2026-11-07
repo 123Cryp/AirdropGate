@@ -1,0 +1,27 @@
+name: unzip upload
+on:
+  push:
+    paths:
+      - "*.zip"
+permissions:
+  contents: write
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract uploaded zip into the repo
+        run: |
+          shopt -s nullglob
+          files=(*.zip)
+          if [ ${#files[@]} -eq 0 ]; then echo "no zip found"; exit 0; fi
+          for f in "${files[@]}"; do
+            unzip -o "$f" -d .
+            rm -f "$f"
+          done
+          rm -rf __MACOSX
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Unpack uploaded zip" || exit 0
+          git push
